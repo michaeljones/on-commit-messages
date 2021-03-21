@@ -17,8 +17,7 @@ being made.
 
 The length of a good commit message is not necessarily related to the size of the code change being
 committed. Some one line changes can take multiple paragraphs to explain. Some commits that touch a
-hundred files can be mundane and obvious and require only a sentence or two. Large chunks of work
-can be sensibly broken up into multiple commits each with their own messages for varying length.
+hundred files can be mundane and obvious and require only a sentence or two.
 
 The important thing is that, if someone looks at the change being made, ideally any and all of their
 questions should be answered by the commit message provided.
@@ -36,30 +35,31 @@ made. This might be:
 - A team member trying to understand your change a week later when you're on holiday
 - A new person joining the project and trying to understand the reason for the code being in the
   state that it is in.
-- You trying to understand your own changes six months later having been off the project for four of
-  those months.
-
-Whatever the scenario, there are a few different reasons why a good commit message might provide
-important context for the state or change of the code in your codebase.
+- You trying to understand your own changes six months.
 
 What kind of understanding do we want from a commit message? Mostly we want to know why the change
 was made and what assumptions or knowledge the committer had when making the change. This helps
-future developers to understand the reasons behind the code and whether they were well founded.
+future developers to understand the reasons behind the changes and whether they were well founded.
 
 
 ### Reflecting on your Changes
 
 Writing a clear and comprehensive commit message can act as a opportunity to reflect on the changes
-that you are making to make sure that they can be explained and to document any part that can't.
+that you are making to make sure that they can be explained and to document any part that can't. It
+acts as a mini code review.
 
 Ideally whilst writing a commit message, you have a view of the to-be-committed changes available to
 you. You can scroll through the diff and make sure that you understand and are happy with the
 changes you see and that your commit message covers anything that might not be completely clear.
-This might include references to source, eg. StackOverflow questions & answers, that have helped you
-come to the conclusion and the set of changes that you have made.
+This might include references to sources of information, eg. StackOverflow questions & answers, that
+have helped you come to the conclusion and the set of changes that you have made.
 
-This process can be used to hold yourself to account. You should explain any changes that you have
-made that you don't fully understand but appear to work as that allows future developers to
+This has the additional advantage of helping you to review the changes themselves. Maybe you left in
+some print-statements, maybe a section of the diff can be handled in a separate commit. This stage
+of reviewing allows you to spot these issues and clean up your commits in advance.
+
+This process can also be used to hold yourself to account. You should explain any changes that you have
+made that you don't fully understand but that appear to work as that allows future developers to
 understand your state of mind and doesn't lend false authority to the changes.
 
 You can also explain things that you feel could be better but that you did not have time to add for
@@ -71,19 +71,19 @@ where I think they should be.
 
 ### Knowledge Transfer
 
-This is part of 'understanding' in many ways but beyond the 'in the moment' comprehension of what is
+This is part of 'understanding' in many ways but goes beyond the 'in the moment' comprehension of what is
 going on in the commit, a good commit message can share situational understanding, communicate
 prioritisation of goals, explain oddities in tooling or languages, highlight unexpected user
 behaviours and other things that provide context to the project.
 
-Are git commit message the best way of transferring this kind of knowledge? No, but they are a
+Are git commit message the best way of transferring this kind of knowledge? No, but they have the
 situational advantage of being attached to the code and change that someone is currently examining.
 
 
 ## Structure
 
 The structure of the commit message is important but not at important as the content. There are a
-few rules to follow when creating a commit message:
+few rules to follow when creating a git commit message:
 
 1. The first line should not exceed 50 characters
 2. The second line should be blank.
@@ -99,8 +99,9 @@ line to 50 characters then I'll happily use 55 characters instead. If I'm pastin
 a URL to the commit message body then I won't worry if those lines exceed 72 characters.
 
 Due to the expectation that the body text is wrapped to 72 characters, most user interfaces will not
-attempt to wrap the content of the commit messages themselves. If they do, it can interfer with user
-formatting.
+attempt to wrap the content of the commit messages themselves. If they do, it can interfere with
+user formatting. As they don't, it is best to wrap them yourself, or ideally have your editor do it,
+to avoid unreadably long lines in commit displays.
 
 ## Creating Commit Messages 
 
@@ -162,14 +163,15 @@ This is not a recommended approach.
 
 - I worked at a company once that kept some files in RCS or some other basic source control system.
   They were config files that barely needed editing. At some point I received some instructions on
-  how to make an edit to one of these and one of the steps was to enter '.' at the prompt. It took
-  me a while to realise that that was the commit message prompt. Enter '.' to make it go away was a
-  serious as we took commit messages in that situation.
+  how to make an edit to one of these and one of the steps was to pres '.' and then 'enter' at the
+  prompt. It took me a while to realise that that was the commit message prompt. Enter '.' to make
+  it go away was a serious as we took commit messages in that situation.
 
 - At another company, a colleague returned from holiday and asked what had changed on the project in
   his absence. I suggested that he could read the commit messages of the commits that had occurred.
   There were not so many. The suggestion was met with laughter which needless to say made me a
   little sad but I suspect that laughter would be a common reaction in our industry.
+
 
 ### Comparison with Code Comments
 
@@ -184,6 +186,10 @@ confusing or complex sections of code without reference to their previous state.
 only discuss a previous state of the code if it is confusing whilst the problem is no longer
 approached in that manner.
 
+You might refer to a comment in your commit message. If the code needs explanation in its current
+state, then write that as a comment in the code and refer to it in the commit message if needed. It
+does not need to be duplicated into the commit message.
+
 There is room to go into more detail commit messages as they are stored within the repository and
 not within the files. Code comments should be thorough but there isn't room to document the history
 of the code base and every decision that has impacted it in comments.
@@ -196,15 +202,21 @@ need a tweak and often the impacts of the small change are quite large or driven
 choices and it is good to document those within the file itself as that is even more available to
 the next develop than the commit message in which the change happened.
 
+
 ### Target Audience
 
 How much you write in a commit message often feels quite dependent on the intended audience. I find
 this particularly when interacting with new technology or new languages. I tend to write explainers
-in commit messags and comments, that later turn out to be incrediblity obvious to anyone familiar
-with the technology.
+in commit messages and comments, that later turn out to be incrediblity obvious to anyone familiar
+with the technology. It is hard to tell at the time though.
 
 I don't know where the line exists for this. It is often best to think about the average or lower
 levels of experience for people in your team and write for them. If you only write for highly
 experience developers then you message might be opaque to more junior members but at the same time
 you don't want to be explaining basic language constructs or the standard library in commit
 messages.
+
+As the team grows in experience, information that might seem necessary in a commit message one month
+might not seem so necessary a few months later. Always try to be wary that new people might join
+your team but ultimately there are other more preferrable ways to catch them up with the basics if
+needed.
