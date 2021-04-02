@@ -8,20 +8,24 @@ do this a dozen times a day. The resulting commit messages are of varying styles
 
 Instead of writing commit messages like:
 
-    Fix mobile width issue
+```
+Fix mobile width issue
+```
 
 We want to write commit messages like:
 
-    Fix mobile width issue
+```
+Fix mobile width issue
 
-    It seems that the various 'edit' links under the headers were right
-    aligned and with some margin or negative margin (from the 'row' class)
-    that was causing it to push out beyond the edge of the page on mobile
-    leading to a weird space down the right.
+It seems that the various 'edit' links under the headers were right
+aligned and with some margin or negative margin (from the 'row' class)
+that was causing it to push out beyond the edge of the page on mobile
+leading to a weird space down the right.
 
-    This seems to address it and uses flexbox instead of float right, I
-    suspect the first pass of this site didn't use flexbox for fear of
-    compatibility issues but we can certainly use it now.
+This seems to address it and uses flexbox instead of float right, I
+suspect the first pass of this site didn't use flexbox for fear of
+compatibility issues but we can certainly use it now.
+```
 
 It is perfect? No, but it provides much more context, explanation and reasoning.
 
@@ -42,13 +46,13 @@ hundred files can be mundane and require only a sentence or two.
 The important thing is that any and all questions about the diff should be answered by the commit
 message provided.
 
-## Why
+## Why Write Good Commit Messages
 
 *The reasons for writing good commit messages.*
 
 ### Understanding
 
-The best reason for good commit message is to help people understand the changes being made. This
+The best reason for a good commit message is to help people understand the changes being made. This
 might be:
 
 - Your colleague doing a code review the same day you made it.
@@ -65,24 +69,22 @@ future developers to understand the reasons behind the changes and whether they 
 ### Reflecting on your Changes
 
 Writing a clear and comprehensive commit message can act as a opportunity to reflect on the changes
-that you are making to make sure that they can be explained and to document any part that can't. It
-acts as a mini code review.
+to make sure that they can be explained and to document any part that can't. It acts as a mini code
+review.
 
-Ideally whilst writing a commit message, you have a view of the to-be-committed changes available to
-you. You can make sure that you understand and are happy with the
+Review the diff whilst writing the message. You can make sure that you understand and are happy with the
 changes you see and that your commit message covers anything that might not be clear.
-This might include references to sources of information, eg. StackOverflow questions & answers, that
-have helped you come to the set of changes that you have made.
+This might include references to sources of information, eg. official documentation or StackOverflow
+questions & answers, that have helped you come to the set of changes that you have made.
 
-This also helps you to review the changes themselves. Maybe you left in
-some print-statements, maybe a section of the diff can be handled in a separate commit. This stage
-of reviewing allows you to spot these issues and clean up your commits in advance.
+Furthermore, maybe you left in some print-statements, maybe a section of the diff can be handled in
+a separate commit. This stage of reviewing allows you to spot these issues and clean up your commits
+in advance.
 
-This process can also be used to hold yourself to account. You should explain any changes that you have
-made that you don't fully understand but that appear to work as that allows future developers to
-understand your state of mind and doesn't lend false authority to the changes. You can also explain
-things that you feel could be better but that you did not have time to add for
-various reasons. [1](#foot-note-guilt)
+You should explain any changes that you have made that you don't fully understand but that appear to
+work as that allows future developers to understand your state of mind and doesn't lend false
+authority to the changes. You can also explain things that you feel could be better but that you did
+not have time to add for various reasons. [1](#foot-note-guilt)
 
 
 ## Structure
@@ -99,9 +101,8 @@ ecosystem can rely on them. The first line is considered to be the subject of th
 like an email has a subject line. The second line separates the subject from the body. The rest is
 the body.
 
-Personally, I think of the limits as soft limits. If I have to sacrifice clarity to get the subject
-line to 50 characters then I'll happily use 55-60 characters instead. If I'm pasting in example code
-or a URL to the commit message body then I won't worry if those lines exceed 72 characters.
+The limits are soft. Nothing breaks if you exceed them. Prefer clarity and formatting over follow
+the limits exactly.
 
 ## Creating Commit Messages 
 
@@ -111,28 +112,28 @@ or a URL to the commit message body then I won't worry if those lines exceed 72 
 
 You can add a commit message to a commit using the `-m` flag. As follows:
 
-  ```shell
-  git commit -m "Support parsing operators in 'exposing' lists"
-  ```
+```shell
+git commit -m "Support parsing operators in 'exposing' lists"
+```
 
 This is quick but only creates a one line commit message which is unlikely to be sufficient. We can
 provide more lines by specifying the `-m` flag multiple times. The `git commit` command joins the
 various `-m` messages together with a blank line between each.
 
-  ```shell
-  git commit -m "Support parsing operators in 'exposing' lists" -m "So that it is easier to retrieve the implementation of the operator when checking & evaluating it. Previously when looking up the 'add' function associated with the '+' operator it would find the 'add' function in the scope of the current module and not the one in the module that defined '+'." -m "This isn't the best fix as it doesn't generalise to other functions that call functions but it seems reasonable to do in the case of operators."
-  ```
+```shell
+git commit -m "Support parsing operators in 'exposing' lists" -m "So that it is easier to retrieve the implementation of the operator when checking & evaluating it. Previously when looking up the 'add' function associated with the '+' operator it would find the 'add' function in the scope of the current module and not the one in the module that defined '+'." -m "This isn't the best fix as it doesn't generalise to other functions that call functions but it seems reasonable to do in the case of operators."
+```
 
 This is clearly awkward to write on a command line and the command does not wrap long lines so the
 result is:
 
-  ```
-  Support parsing operators in 'exposing' lists
+```
+Support parsing operators in 'exposing' lists
 
-  So that it is easier to retrieve the implementation of the operator when checking & evaluating it. Previously when looking up the 'add' function associated with the '+' operator it would find the 'add' function in the scope of the current module and not the one in the module that defined '+'.
+So that it is easier to retrieve the implementation of the operator when checking & evaluating it. Previously when looking up the 'add' function associated with the '+' operator it would find the 'add' function in the scope of the current module and not the one in the module that defined '+'.
 
-  This isn't the best fix as it doesn't generalise to other functions that call functions but it seems reasonable to do in the case of operators.
-  ```
+This isn't the best fix as it doesn't generalise to other functions that call functions but it seems reasonable to do in the case of operators.
+```
 
 Which is not that readable. The approach also makes it hard to introduce formatted lists or blocks
 of code.
@@ -150,10 +151,10 @@ you to compose your commit message. In order to figure out what editor to use, i
 - `EDITOR` environment variable
 
 And if none of those are set then it uses `vi` on your system. If you are not used to it, `vi` is a
-confusing and complicated experience that can be off-putting. [2](#foot-note-vi) Good alternatives
-to `vi` for composing your commit messages are `nano`, `pico` and `micro` depending on what your
-system has installed. Nano includes shortcut help at the bottom of the display to help you figure
-out how to save and exit.
+confusing and complicated experience that can be off-putting <sup>[2](#foot-note-vi)</sup>. Good
+alternatives to `vi` for composing your commit messages are `nano`, `pico` and `micro` depending on
+what your system has installed. Nano includes shortcut help at the bottom of the display to help you
+figure out how to save and exit.
 
 Well configured command line editors will provide you with syntax highlighting and automatic line
 wrapping to help you keep to the appropriate structure of a commit message without confining you to
@@ -197,16 +198,17 @@ commit messages and give guidance and help in adhering to the desired structure.
 ### Visual Studio Code
 
 VSCode has a git integration and includes a box for composing commit messages in the top left of the
-git tooling. The box appears as a single line but will expand to accommodate new lines in the
-message to allow for a multiline commit message.
+git tooling.
 
-It warns when the first line exceeds 50 characters and when other lines exceed 72 characters.
+The box appears as a single line but will expand to accommodate new lines in the
+message to allow for a multiline commit message. It warns when the first line exceeds 50 characters
+and when other lines exceed 72 characters.
 
-Unfortunately by default the box is too small. It is part of the left hand side bar and so normally does not have room for a 72
-character wide message. It wraps lines within the set width of the box but does not introduce line
-breaks for you. This can lead to visually confusing results where, on the third line of a message in
-a box that fits 30 characters a line, you start to get warnings that your line is over 72
-characters.
+Unfortunately by default the box is too small. It is part of the left hand side bar and so normally
+does not have room for a 72 character wide message. It wraps lines within the set width of the box
+but does not introduce line breaks for you. This can lead to visually confusing results where, on
+the third line of a message in a box that fits around 30 characters a line, you start to get
+warnings that your line is over 72 characters.
 
 You can improve the experience a little by increasing the width of the side bar when creating commit
 messages so that there is room for 72 characters.
@@ -215,10 +217,11 @@ It does not automatically add line breaks for your at the character limits so yo
 add line breaks when you go over the limits.
 
 
-## Types of Commit Message
+## Types of Commit
 
-There are only so many types of changes that you might make to a code base and there is a reasonable
-commit message style to match each one.
+*Explore common commit types and the points to address in the message.*
+
+The core of all commit messages is the same. To explain what is being changed and why.
 
 ### Additional Feature
 
@@ -230,29 +233,46 @@ commit message style to match each one.
 
 - You might consider explaining:
 
+  - Broadly what does the feature do? What parts of the system does it impact?
+
   - Why were particular technology or data structure choices made? Why are we using a queue in the
-    messaging system? What was the motivation to store values in a set over an array?
+    messaging system? Does part of the design allow for extension?
 
   - What is missing from the current implementation that you'd like to highlight? Does this first
     implementation include adequate error messages for the user? Does it have an accessible UI?
 
+And example:
+
 ```
-Add initial 'frequency' page
+Add django-hCaptcha to spam protection
 
-We display a list of the user's non-regular friends along with their
-contact-periods and a live updating value of 'yearly-contacts' at the
-top to allow users to adjust the numbers to reach an acceptable level of
-commmitment.
+We wire it up according to the docs:
 
-Missing form submission which would allow for permanent changes. Also
-missing general styling.
+  https://github.com/AndrejZbin/django-hcaptcha
+
+Having lost some time trying to use this guide:
+
+  [redacted]
+
+The field approach seems better as we don't have direct access to the
+'post' handler when using django-allauth. Also is models well as a field
+that succeeds and fails by itself.
+
+We have to change top.utils.AlignSecond to anticipate the child content
+being safe to use. I'm not entirely sure why that hasn't been necessary
+before but without it we just see the html of the captcha and not the
+actual UI.
+
+Otherwise at this point it works locally and hopefully will work in
+production. I've added the production keys from the hcaptcha.com
+dashboard to the config files in /var on the production server.
 ```
 
 ### Configuration Change
 
 Configuration changes are often small and have large impacts. Consider explaining what drove the
 choice to change the configuration. What was happening before? What should we expect now? Was any
-other work required?
+other work required? Has it be tested in some environment already?
 
 ```
 Upgrade to postgres 12
@@ -285,7 +305,7 @@ to have appeared in the system.
 ```
 Updated dependencies with `mix deps.update --all`
 
-I have no read any change logs. The tests still pass so I assume it
+I have not read any change logs. The tests still pass so I assume it
 is fine.
 ```
 
@@ -315,6 +335,31 @@ Think about documenting what problem you were seeing. What resources you have re
 you have tried. Link out to blog posts, or official documentation, or to StackOverflow answers if
 they are driving your decision making.
 
+```
+Return 403 in building check
+
+Previously we only redirected back to the home page and, I guess, relied
+on the building_id in the session being reset by the page controller but
+we're doing that any more so we want to show a '403' page instead. We're
+not expecting the user to get into a situation where they have the wrong
+building id in the session anyway.
+
+We also fix up the page controller so that it doesn't try to inline the
+user & building checks. The user check only checks for a 'current_user'
+and we're already doing that with the multiple 'index' defintions and
+the building_check only applies when there is a user to check so it
+doesn't impact the no-user 'index' and so it can safely be put at the
+top.
+
+If we keep them in the controller action then they fail anyway. The
+building_check renders the 403 and then the action tries to render the
+building info and it double writes to the conn which is an error.
+
+We also fix up the session controller tests to look for page content
+instead of looking for a redirect.
+```
+
+
 ### Trivial Bugfix
 
 Some bugfixes are simple logic errors and seem self-explanatory in the moment but still provide some
@@ -331,6 +376,9 @@ that introduced them provided that commit has not been shared with others.
 
 ### Trivial Rename
 
+Renames might seem trivial but often reflect a change in thought about the system design which can
+be worth highlighting.
+
 ```
 Rename Model to StaffModel
 
@@ -342,6 +390,9 @@ so we're renaming to make space for that.
 ## References
 
 - [A Note About Git Commit Messages - tbaggery.com](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) - 19 April 2008
+- [core.editor - Git Documentation](https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor)
+- [GIT_EDITOR - Git Documentation](https://www.git-scm.com/docs/git-var#Documentation/git-var.txt-GITEDITOR)
+- [git commit configuration - Git Documentation](https://www.git-scm.com/docs/git-commit#_environment_and_configuration_variables)
 
 ## Footnotes
 
