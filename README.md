@@ -4,7 +4,7 @@
 When committing a change in git, you are asked to provide a commit message. Millions of developers
 do this a dozen times a day. The resulting commit messages are of varying styles and quality. This
 document attempts to examine what makes a good commit message and lay out a case for trying to make
-a good commit messages whenever you can.
+good commit messages whenever you can.
 
 ## Goal
 
@@ -30,9 +30,11 @@ It is perfect? No, but it provides much more context, explanation and reasoning.
 ## What is a good commit message?
 
 A good commit message is a message that provides adequate context and reasoning for the change being
-made. In the case of fixing a typo, this might be `"Fixed typo"` as the change is genuinely self
+made.
+
+In the case of fixing a typo, this might be `Fixed typo` as the change is genuinely self
 explanatory. In the case of fixing a hard to track down bug that has plagued the system for a long
-time or taken hours or days to figure out, this might mean a full page of text with complete
+time, this might mean a half page of text with complete
 paragraphs, links and references to information sources that aid in the understanding of the change
 being made.
 
@@ -40,7 +42,7 @@ The length of a good commit message is not necessarily related to the size of th
 committed. Some one line changes can take multiple paragraphs to explain. Some commits that touch a
 hundred files can be mundane and obvious and require only a sentence or two.
 
-The important thing is that, if someone looks at the change being made, ideally any and all of their
+The important thing is that for someone looking at the changes being made, any and all of their
 questions should be answered by the commit message provided.
 
 ## Why
@@ -49,14 +51,14 @@ questions should be answered by the commit message provided.
 
 ### Understanding
 
-The most obvious reason for a good commit message is to help people to understand the changes being
+The most obvious reason for a good commit message is to help people understand the changes being
 made. This might be:
 
 - Your colleague doing a code review the same day you made it.
 - A team member trying to understand your change a week later when you're on holiday
 - A new person joining the project and trying to understand the reason for the code being in the
   state that it is in.
-- You trying to understand your own changes six months.
+- You trying to understand your own changes six months later.
 
 What kind of understanding do we want from a commit message? Mostly we want to know why the change
 was made and what assumptions or knowledge the committer had when making the change. This helps
@@ -71,9 +73,9 @@ acts as a mini code review.
 
 Ideally whilst writing a commit message, you have a view of the to-be-committed changes available to
 you. You can scroll through the diff and make sure that you understand and are happy with the
-changes you see and that your commit message covers anything that might not be completely clear.
+changes you see and that your commit message covers anything that might not be clear.
 This might include references to sources of information, eg. StackOverflow questions & answers, that
-have helped you come to the conclusion and the set of changes that you have made.
+have helped you come to the set of changes that you have made.
 
 This has the additional advantage of helping you to review the changes themselves. Maybe you left in
 some print-statements, maybe a section of the diff can be handled in a separate commit. This stage
@@ -81,13 +83,10 @@ of reviewing allows you to spot these issues and clean up your commits in advanc
 
 This process can also be used to hold yourself to account. You should explain any changes that you have
 made that you don't fully understand but that appear to work as that allows future developers to
-understand your state of mind and doesn't lend false authority to the changes.
+understand your state of mind and doesn't lend false authority to the changes. You can also explain
+things that you feel could be better but that you did not have time to add for
+various reasons. [1](#foot-note-guilt)
 
-You can also explain things that you feel could be better but that you did not have time to add for
-various reasons. Sometimes I can use this to guilt myself into making changes that I know I should
-do. I can sometimes make less than ideal changes but I find it hard to write a commit message
-explaining that I know they are less than ideal and so end up doing the improvements to get them to
-where I think they should be.
 
 
 ### Knowledge Transfer
@@ -173,7 +172,7 @@ it checks, in order:
 
 And if none of those are set then it uses `vi` on your system. If you are not used to it, `vi` is a
 confusing and complicated experience that can be off putting. Defaulting to `vi` probably drives
-people towards using the `-m` flag and results in poorer commit messages.
+people towards using the `-m` flag and results in more single line commit messages.
 
 Good alternatives to `vi` for composing your commit messages are `nano`, `pico` and `micro`
 depending on what your system has installed. Nano includes shortcut help at the bottom of the
@@ -188,6 +187,29 @@ It is possible to use non-command line based editors provided they can be launch
 been completed by the time your editor closes. An example of this is running `gvim` with the `-f`
 (foreground) flag. It is harder to use IDE-like editors in this role as they don't tend to be opened
 and closed on a per-file basis.
+
+#### Setting your Command Line Editor
+
+If you are unfamiliar with shells and their configuration, then the easiest approach is probably the
+`core.editor` git config value. You can see it with:
+
+```
+git config --global core.editor nano
+```
+
+If you are familiar with your `.bashrc` or `.zshrc`, you can add a line setting the environment
+variable of your choice:
+
+```
+export EDITOR=nano
+```
+
+If you want to play around with options and different editors then you can set it on the command
+line itself:
+
+```
+GIT_EDITOR=nano git commit
+```
 
 ### Integrated User Interfaces
 
@@ -305,3 +327,10 @@ As the team grows in experience, information that might seem necessary in a comm
 might not seem so necessary a few months later. Always try to be wary that new people might join
 your team but ultimately there are other more preferrable ways to catch them up with the basics if
 needed.
+
+## Notes
+
+<span name="foot-note-guilt">1</span> Sometimes I can use this to guilt myself into making changes that I know I should
+do. I can sometimes make less than ideal changes but I find it hard to write a commit message
+explaining that I know they are less than ideal and so end up doing the improvements to get them to
+where I think they should be.
