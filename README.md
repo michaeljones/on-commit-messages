@@ -2,9 +2,7 @@
 # On Git Commit Messages
 
 When committing a change in git, you are asked to provide a commit message. Millions of developers
-do this a dozen times a day. The resulting commit messages are of varying styles and quality. This
-document attempts to examine what makes a good commit message and lay out a case for trying to make
-good commit messages whenever you can.
+do this a dozen times a day. The resulting commit messages are of varying styles and quality.
 
 ## Goal
 
@@ -33,17 +31,16 @@ A good commit message is a message that provides adequate context and reasoning 
 made.
 
 In the case of fixing a typo, this might be `Fixed typo` as the change is genuinely self
-explanatory. In the case of fixing a hard to track down bug that has plagued the system for a long
-time, this might mean a half page of text with complete
-paragraphs, links and references to information sources that aid in the understanding of the change
+explanatory. In the case of fixing a hard to track down bug, this might mean a half page of text with
+paragraphs, links and references to information that aid in the understanding of the change
 being made.
 
-The length of a good commit message is not necessarily related to the size of the code change being
-committed. Some one line changes can take multiple paragraphs to explain. Some commits that touch a
-hundred files can be mundane and obvious and require only a sentence or two.
+The length of a good commit message is not necessarily related to the size of the diff. Some one
+line changes take multiple paragraphs to explain. Some commits that touch a
+hundred files can be mundane and require only a sentence or two.
 
-The important thing is that for someone looking at the changes being made, any and all of their
-questions should be answered by the commit message provided.
+The important thing is that any and all questions about the diff should be answered by the commit
+message provided.
 
 ## Why
 
@@ -51,11 +48,11 @@ questions should be answered by the commit message provided.
 
 ### Understanding
 
-The most obvious reason for a good commit message is to help people understand the changes being
-made. This might be:
+The best reason for good commit message is to help people understand the changes being made. This
+might be:
 
 - Your colleague doing a code review the same day you made it.
-- A team member trying to understand your change a week later when you're on holiday
+- A team member trying to understand your change a week later when you're on holiday.
 - A new person joining the project and trying to understand the reason for the code being in the
   state that it is in.
 - You trying to understand your own changes six months later.
@@ -72,12 +69,12 @@ that you are making to make sure that they can be explained and to document any 
 acts as a mini code review.
 
 Ideally whilst writing a commit message, you have a view of the to-be-committed changes available to
-you. You can scroll through the diff and make sure that you understand and are happy with the
+you. You can make sure that you understand and are happy with the
 changes you see and that your commit message covers anything that might not be clear.
 This might include references to sources of information, eg. StackOverflow questions & answers, that
 have helped you come to the set of changes that you have made.
 
-This has the additional advantage of helping you to review the changes themselves. Maybe you left in
+This also helps you to review the changes themselves. Maybe you left in
 some print-statements, maybe a section of the diff can be handled in a separate commit. This stage
 of reviewing allows you to spot these issues and clean up your commits in advance.
 
@@ -86,18 +83,6 @@ made that you don't fully understand but that appear to work as that allows futu
 understand your state of mind and doesn't lend false authority to the changes. You can also explain
 things that you feel could be better but that you did not have time to add for
 various reasons. [1](#foot-note-guilt)
-
-
-
-### Knowledge Transfer
-
-This is part of 'understanding' in many ways but goes beyond the 'in the moment' comprehension of what is
-going on in the commit, a good commit message can share situational understanding, communicate
-prioritisation of goals, explain oddities in tooling or languages, highlight unexpected user
-behaviours and other things that provide context to the project.
-
-Are git commit message the best way of transferring this kind of knowledge? No, but they have the
-situational advantage of being attached to the code and change that someone is currently examining.
 
 
 ## Structure
@@ -117,11 +102,6 @@ the body.
 Personally, I think of the limits as soft limits. If I have to sacrifice clarity to get the subject
 line to 50 characters then I'll happily use 55-60 characters instead. If I'm pasting in example code
 or a URL to the commit message body then I won't worry if those lines exceed 72 characters.
-
-Due to the expectation that the body text is wrapped to 72 characters, most user interfaces will not
-attempt to wrap the content of the commit messages themselves. If they do, it can interfere with
-user formatting. As they don't, it is best to wrap them yourself, or ideally have your editor do it,
-to avoid unreadably long lines.
 
 ## Creating Commit Messages 
 
@@ -154,16 +134,15 @@ result is:
   This isn't the best fix as it doesn't generalise to other functions that call functions but it seems reasonable to do in the case of operators.
   ```
 
-Which is not optimally readable and this situation would be much trickier if you want to represent
-a list of items or blocks of code.
+Which is not that readable. The approach also makes it hard to introduce formatted lists or blocks
+of code.
 
 This is not a recommended approach.
 
 ### Command Line Editors
 
-If you run `git commit` without the `-m` flag then git will attempt to use your editor of choice to
-open a text file for you to compose your commit message. In order to figure out what editor to use,
-it checks, in order:
+If you run `git commit` without the `-m` flag then git will attempt open your editor of choice for
+you to compose your commit message. In order to figure out what editor to use, it checks, in order:
 
 - `GIT_EDITOR` environment variable
 - `core.editor` config value
@@ -171,12 +150,10 @@ it checks, in order:
 - `EDITOR` environment variable
 
 And if none of those are set then it uses `vi` on your system. If you are not used to it, `vi` is a
-confusing and complicated experience that can be off putting. Defaulting to `vi` probably drives
-people towards using the `-m` flag and results in more single line commit messages.
-
-Good alternatives to `vi` for composing your commit messages are `nano`, `pico` and `micro`
-depending on what your system has installed. Nano includes shortcut help at the bottom of the
-display to help you figure out how to save and exit.
+confusing and complicated experience that can be off-putting. [2](#foot-note-vi) Good alternatives
+to `vi` for composing your commit messages are `nano`, `pico` and `micro` depending on what your
+system has installed. Nano includes shortcut help at the bottom of the display to help you figure
+out how to save and exit.
 
 Well configured command line editors will provide you with syntax highlighting and automatic line
 wrapping to help you keep to the appropriate structure of a commit message without confining you to
@@ -213,19 +190,19 @@ GIT_EDITOR=nano git commit
 
 ### Integrated User Interfaces
 
-There are number of editors, IDEs and git tools that allow you to compose commit messages inside
+There are a number of editors, IDEs and git tools that allow you to compose commit messages inside
 them and commit directly from their interface. These are great provided they encourage multiline
 commit messages and give guidance and help in adhering to the desired structure.
 
 ### Visual Studio Code
 
-VSCode has git integration and includes a box for composing commit messages in the top left of the
+VSCode has a git integration and includes a box for composing commit messages in the top left of the
 git tooling. The box appears as a single line but will expand to accommodate new lines in the
 message to allow for a multiline commit message.
 
 It warns when the first line exceeds 50 characters and when other lines exceed 72 characters.
 
-Unfortunately it is part of the left hand side bar and so normally does not have room for a 72
+Unfortunately by default the box is too small. It is part of the left hand side bar and so normally does not have room for a 72
 character wide message. It wraps lines within the set width of the box but does not introduce line
 breaks for you. This can lead to visually confusing results where, on the third line of a message in
 a box that fits 30 characters a line, you start to get warnings that your line is over 72
@@ -254,6 +231,17 @@ commit message style to match each one.
 ### Trivial Bug Fix
 
 ### Trivial Rename
+
+
+## Notes
+
+<span name="foot-note-guilt">1</span> Sometimes I can use this to guilt myself into making changes that I know I should
+do. I can sometimes make less than ideal changes but I find it hard to write a commit message
+explaining that I know they are less than ideal and so end up doing the improvements to get them to
+where I think they should be.
+
+<span name="foot-note-vi">2</span> Defaulting to `vi` probably drives people towards using the `-m` flag and results in more single line commit messages.
+
 
 ## References
 
@@ -300,10 +288,3 @@ As the team grows in experience, information that might seem necessary in a comm
 might not seem so necessary a few months later. Always try to be wary that new people might join
 your team but ultimately there are other more preferrable ways to catch them up with the basics if
 needed.
-
-## Notes
-
-<span name="foot-note-guilt">1</span> Sometimes I can use this to guilt myself into making changes that I know I should
-do. I can sometimes make less than ideal changes but I find it hard to write a commit message
-explaining that I know they are less than ideal and so end up doing the improvements to get them to
-where I think they should be.
