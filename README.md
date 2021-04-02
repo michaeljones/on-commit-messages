@@ -6,6 +6,27 @@ do this a dozen times a day. The resulting commit messages are of varying styles
 document attempts to examine what makes a good commit message and lay out a case for trying to make
 a good commit messages whenever you can.
 
+## Goal
+
+Instead of writing commit messages like:
+
+    Fix mobile width issue
+
+We want to write commit messages like:
+
+    Fix mobile width issue
+
+    It seems that the various 'edit' links under the headers were right
+    aligned and with some margin or negative margin (from the 'row' class)
+    that was causing it to push out beyond the edge of the page on mobile
+    leading to a weird space down the right.
+
+    This seems to address it and uses flexbox instead of float right, I
+    suspect the first pass of this site didn't use flexbox for fear of
+    compatibility issues but we can certainly use it now.
+
+It is perfect? No, but it provides much more context, explanation and reasoning.
+
 ## What is a good commit message?
 
 A good commit message is a message that provides adequate context and reasoning for the change being
@@ -24,7 +45,7 @@ questions should be answered by the commit message provided.
 
 ## Why
 
-Here we attempt to document the reasons for writing good commit messages.
+*The reasons for writing good commit messages.*
 
 ### Understanding
 
@@ -82,7 +103,7 @@ situational advantage of being attached to the code and change that someone is c
 
 ## Structure
 
-The structure of the commit message is important but not at important as the content. There are a
+The structure of the commit message is important but not as important as the content. There are a
 few rules to follow when creating a git commit message:
 
 1. The first line should not exceed 50 characters
@@ -95,17 +116,17 @@ like an email has a subject line. The second line separates the subject from the
 the body.
 
 Personally, I think of the limits as soft limits. If I have to sacrifice clarity to get the subject
-line to 50 characters then I'll happily use 55 characters instead. If I'm pasting in example code or
-a URL to the commit message body then I won't worry if those lines exceed 72 characters.
+line to 50 characters then I'll happily use 55-60 characters instead. If I'm pasting in example code
+or a URL to the commit message body then I won't worry if those lines exceed 72 characters.
 
 Due to the expectation that the body text is wrapped to 72 characters, most user interfaces will not
 attempt to wrap the content of the commit messages themselves. If they do, it can interfere with
 user formatting. As they don't, it is best to wrap them yourself, or ideally have your editor do it,
-to avoid unreadably long lines in commit displays.
+to avoid unreadably long lines.
 
 ## Creating Commit Messages 
 
-Here we explore ways of creating commit messages and the various pros and cons of these methods.
+*Explore the various ways of creating a commit message.*
 
 ### Command Line Flags
 
@@ -115,7 +136,7 @@ You can add a commit message to a commit using the `-m` flag. As follows:
   git commit -m "Support parsing operators in 'exposing' lists"
   ```
 
-This quick but only creates a one line commit message which is unlikely to be sufficient. We can
+This is quick but only creates a one line commit message which is unlikely to be sufficient. We can
 provide more lines by specifying the `-m` flag multiple times. The `git commit` command joins the
 various `-m` messages together with a blank line between each.
 
@@ -141,9 +162,73 @@ This is not a recommended approach.
 
 ### Command Line Editors
 
+If you run `git commit` without the `-m` flag then git will attempt to use your editor of choice to
+open a text file for you to compose your commit message. In order to figure out what editor to use,
+it checks, in order:
+
+- `GIT_EDITOR` environment variable
+- `core.editor` config value
+- `VISUAL` environment variable
+- `EDITOR` environment variable
+
+And if none of those are set then it uses `vi` on your system. If you are not used to it, `vi` is a
+confusing and complicated experience that can be off putting. Defaulting to `vi` probably drives
+people towards using the `-m` flag and results in poorer commit messages.
+
+Good alternatives to `vi` for composing your commit messages are `nano`, `pico` and `micro`
+depending on what your system has installed. Nano includes shortcut help at the bottom of the
+display to help you figure out how to save and exit.
+
+Well configured command line editors will provide you with syntax highlighting and automatic line
+wrapping to help you keep to the appropriate structure of a commit message without confining you to
+it.
+
+It is possible to use non-command line based editors provided they can be launched in a
+"blocking" fashion so that the `git commit` command can assume that the commit message will have
+been completed by the time your editor closes. An example of this is running `gvim` with the `-f`
+(foreground) flag. It is harder to use IDE-like editors in this role as they don't tend to be opened
+and closed on a per-file basis.
+
 ### Integrated User Interfaces
 
-## Examples
+There are number of editors, IDEs and git tools that allow you to compose commit messages inside
+them and commit directly from their interface. These are great provided they encourage multiline
+commit messages and give guidance and help in adhering to the desired structure.
+
+### Visual Studio Code
+
+VSCode has git integration and includes a box for composing commit messages in the top left of the
+git tooling. The box appears as a single line but will expand to accommodate new lines in the
+message to allow for a multiline commit message.
+
+It warns when the first line exceeds 50 characters and when other lines exceed 72 characters.
+
+Unfortunately it is part of the left hand side bar and so normally does not have room for a 72
+character wide message. It wraps lines within the set width of the box but does not introduce line
+breaks for you. This can lead to visually confusing results where, on the third line of a message in
+a box that fits 30 characters a line, you start to get warnings that your line is over 72
+characters.
+
+You can improve the experience a little by increasing the width of the side bar when creating commit
+messages so that there is room for 72 characters.
+
+
+## Types of Commit Message
+
+There are only so many types of changes that you might make to a code base and there is a reasonable
+commit message style to match each one.
+
+### Additional Feature
+
+### Configuration Change
+
+### Dependency Update
+
+### Complex Bug Fix
+
+### Trivial Bug Fix
+
+### Trivial Rename
 
 ## References
 
