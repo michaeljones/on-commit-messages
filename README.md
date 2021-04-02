@@ -3,6 +3,12 @@
 When committing a change in git, you are asked to provide a commit message. Millions of developers
 do this a dozen times a day. The resulting commit messages are of varying styles and quality.
 
+All too often when checking out a new project, the history is a long stretch of single line commit
+messages offering nothing more than cursory information about what is changing. I used to pride
+myself on writing succinct single line commit messages and then one day I realised I could write as
+much as I'd like in each one, just brain dumping all the context that I could gather, and I've never
+found a reason to stop. Please join me.
+
 ## Goal
 
 Instead of writing commit messages like:
@@ -27,6 +33,7 @@ compatibility issues but we can certainly use it now.
 ```
 
 Is it perfect? No, but it provides much more context, explanation and reasoning.
+
 
 ## What is a good commit message?
 
