@@ -222,18 +222,128 @@ commit message style to match each one.
 
 ### Additional Feature
 
+- Any reasonably large feature will break down into a series of commits so there rarely a single
+  commit that has a whole feature in it.
+
+- Features are introduced due to user or business requirements which don't generally need to be
+  explained in the commit message.
+
+- You might consider explaining:
+
+  - Why were particular technology or data structure choices made? Why are we using a queue in the
+    messaging system? What was the motivation to store values in a set over an array?
+
+  - What is missing from the current implementation that you'd like to highlight? Does this first
+    implementation include adequate error messages for the user? Does it have an accessible UI?
+
+```
+Add initial 'frequency' page
+
+We display a list of the user's non-regular friends along with their
+contact-periods and a live updating value of 'yearly-contacts' at the
+top to allow users to adjust the numbers to reach an acceptable level of
+commmitment.
+
+Missing form submission which would allow for permanent changes. Also
+missing general styling.
+```
+
 ### Configuration Change
+
+Configuration changes are often small and have large impacts. Consider explaining what drove the
+choice to change the configuration. What was happening before? What should we expect now? Was any
+other work required?
+
+```
+Upgrade to postgres 12
+
+Quite a big jump but I've not updated the database ever so this is where
+we get to. Django had started using some syntax for its migrations (I
+think) that was only supported in 9.4 so some migrations hadn't run in
+production which was an issue.
+
+The upgrade was down with the help of:
+
+  https://github.com/tianon/docker-postgres-upgrade
+
+I made a copy of the underlying postgres data folder and then upgraded
+that to 12 using the helper above and then changed the postgres image
+version and pointed at the new data folder and redeployed.
+
+So that this point these changes have already been deployed but they
+seem to be stable and working.
+```
 
 ### Dependency Update
 
-### Complex Bug Fix
+Sometimes we update dependencies simply so that we stay up to date. Sometimes we want a particular
+bugfix. Sometimes the update introduces a new feature that we could take advantage of. Have you
+checked the change logs for all the changes? Are you assuming that they'll be fine? It is ok to not
+read all the change logs but it is relevant context for anyone trying to solve a new bug that seems
+to have appeared in the system.
 
-### Trivial Bug Fix
+```
+Updated dependencies with `mix deps.update --all`
+
+I have no read any change logs. The tests still pass so I assume it
+is fine.
+```
+
+Or:
+
+```
+Update markdown renderer to 3.2.3
+
+As this resolves the issue we've been seeing with bold links being
+rendered incorrectly.
+```
+
+Or:
+
+```
+Updated Phoenix Live View to 0.13.0
+
+And followed the instructions in the changelog to update our system
+for the evolving API. Details here:
+
+  https://github.com/phoenixframework/phoenix_live_view/blob/master/CHANGELOG.md#0130-2020-05-21
+```
+
+### Complex Bugfix
+
+Think about documenting what problem you were seeing. What resources you have read. What approaches
+you have tried. Link out to blog posts, or official documentation, or to StackOverflow answers if
+they are driving your decision making.
+
+### Trivial Bugfix
+
+Some bugfixes are simple logic errors and seem self-explanatory in the moment but still provide some
+detail.
+
+```
+Fix off by one error
+
+To stop us missing the last element in the array.
+```
+
+Where possible trivial fixes with no story of their own should be squashed back into the commit
+that introduced them provided that commit has not been shared with others.
 
 ### Trivial Rename
 
+```
+Rename Model to StaffModel
 
-## Notes
+When we started out, we thought we'd be storing all the state for the
+application here but we need to introduce more non-staff functionality
+so we're renaming to make space for that.
+```
+
+## References
+
+- [A Note About Git Commit Messages - tbaggery.com](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) - 19 April 2008
+
+## Footnotes
 
 <span name="foot-note-guilt">1</span> Sometimes I can use this to guilt myself into making changes that I know I should
 do. I can sometimes make less than ideal changes but I find it hard to write a commit message
@@ -241,11 +351,6 @@ explaining that I know they are less than ideal and so end up doing the improvem
 where I think they should be.
 
 <span name="foot-note-vi">2</span> Defaulting to `vi` probably drives people towards using the `-m` flag and results in more single line commit messages.
-
-
-## References
-
-- [A Note About Git Commit Messages - tbaggery.com](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) - 19 April 2008
 
 ## Appendix
 
