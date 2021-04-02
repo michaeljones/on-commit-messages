@@ -191,7 +191,7 @@ and closed on a per-file basis.
 #### Setting your Command Line Editor
 
 If you are unfamiliar with shells and their configuration, then the easiest approach is probably the
-`core.editor` git config value. You can see it with:
+`core.editor` git config value. You can set it with:
 
 ```
 git config --global core.editor nano
@@ -204,8 +204,8 @@ variable of your choice:
 export EDITOR=nano
 ```
 
-If you want to play around with options and different editors then you can set it on the command
-line itself:
+If you want to play around with options and different editors then you can set it as part of the
+command itself:
 
 ```
 GIT_EDITOR=nano git commit
@@ -234,6 +234,9 @@ characters.
 You can improve the experience a little by increasing the width of the side bar when creating commit
 messages so that there is room for 72 characters.
 
+It does not automatically add line breaks for your at the character limits so you have to manually
+add line breaks when you go over the limits.
+
 
 ## Types of Commit Message
 
@@ -258,39 +261,18 @@ commit message style to match each one.
 
 ## Appendix
 
-### Personal History
-
-- When I started developing I used to try to write as succinct commit messages as possible. If I
-  could come up with 5-8 words that felt like the covered the contents of the commit, I would pat
-  myself on the back. Job well done. I don't know why I felt like this.
-
-  A few years in, I realise these messages could be as long as you liked and I couldn't see a
-  downside in just pouring out all the context I could think of into those messages. I still can't
-  see one.
-
-- I worked at a company once that kept some files in RCS or some other basic source control system.
-  They were config files that barely needed editing. At some point I received some instructions on
-  how to make an edit to one of these and one of the steps was to pres '.' and then 'enter' at the
-  prompt. It took me a while to realise that that was the commit message prompt. Enter '.' to make
-  it go away was a serious as we took commit messages in that situation.
-
-- At another company, a colleague returned from holiday and asked what had changed on the project in
-  his absence. I suggested that he could read the commit messages of the commits that had occurred.
-  There were not so many. The suggestion was met with laughter which needless to say made me a
-  little sad but I suspect that laughter would be a common reaction in our industry.
-
-
 ### Comparison with Code Comments
 
 It is reasonable to ask what belongs in a commit message and what belongs in comments in the code.
 There are subtleties to this but normally commit messages talk about why a change is being made and
 code comments talk about why the code does what it is doing.
 
-More explicitly, commit messages are temporal whilst code comments are statically bound to the state
+More explicitly, commit messages are 'in the moment of the change' whilst code comments are statically bound to
+the state
 of the code as it stands. Commit messages will commonly be discussing what has happened previously
 and why that has motivated the change being made. Code comments tend to explain particularly
 confusing or complex sections of code without reference to their previous state. A comment would
-only discuss a previous state of the code if it is confusing whilst the problem is no longer
+only discuss a previous state of the code if it is confusing why the problem is no longer
 approached in that manner.
 
 You might refer to a comment in your commit message. If the code needs explanation in its current
@@ -300,15 +282,6 @@ does not need to be duplicated into the commit message.
 There is room to go into more detail commit messages as they are stored within the repository and
 not within the files. Code comments should be thorough but there isn't room to document the history
 of the code base and every decision that has impacted it in comments.
-
-One aspect where I think they overlap more is in parts of the code that are touched less often. The
-less often code is touched, the less familiar it is to the current developers and the more it can be
-sensible to have lengthly comments about what is going on. I find this tends to impact 'write and
-forget' config files more than code itself. A config file might remain untouched for a year and then
-need a tweak and often the impacts of the small change are quite large or driven by particular
-choices and it is good to document those within the file itself as that is even more available to
-the next develop than the commit message in which the change happened.
-
 
 ### Target Audience
 
