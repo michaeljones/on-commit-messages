@@ -107,7 +107,7 @@ ecosystem can rely on them. The first line is considered to be the subject of th
 like an email has a subject line. The second line separates the subject from the body. The rest is
 the body.
 
-The limits are soft. Nothing breaks if you exceed them. Prefer clarity and formatting over follow
+The limits are soft. Nothing breaks if you exceed them. Prefer clarity and formatting over following
 the limits exactly.
 
 ## Creating Commit Messages 
