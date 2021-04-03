@@ -171,7 +171,8 @@ It is possible to use non-command line based editors provided they can be launch
 "blocking" fashion so that the `git commit` command can assume that the commit message will have
 been completed by the time your editor closes. An example of this is running `gvim` with the `-f`
 (foreground) flag. It is harder to use IDE-like editors in this role as they don't tend to be opened
-and closed on a per-file basis.
+and closed on a per-file basis. Github has [documentation](https://docs.github.com/en/github/getting-started-with-github/associating-text-editors-with-git)
+for some popular editors.
 
 #### Setting your Command Line Editor
 
@@ -397,6 +398,8 @@ so we're renaming to make space for that.
 - [core.editor - Git Documentation](https://www.git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor)
 - [GIT_EDITOR - Git Documentation](https://www.git-scm.com/docs/git-var#Documentation/git-var.txt-GITEDITOR)
 - [git commit configuration - Git Documentation](https://www.git-scm.com/docs/git-commit#_environment_and_configuration_variables)
+- [Associating text editors with Git](https://docs.github.com/en/github/getting-started-with-github/associating-text-editors-with-git)
+- [Git tip: committing with verbose mode](https://tekin.co.uk/2020/03/git-commit-verbose-mode) - 6 March 2020
 
 ## Appendix
 
