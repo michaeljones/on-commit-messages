@@ -392,6 +392,15 @@ application here but we need to introduce more non-staff functionality
 so we're renaming to make space for that.
 ```
 
+## Conclusion
+
+Writing a good commit message can provide a lot of context for others and aid your own understanding
+of the work you have done. Additional context is does not take a lot of time to provide and has no
+discernable downsides to it. Git does a poor job of providing an easy out of the box environment for
+writing longer commit messages but it is not hard to set one up.
+
+Your colleagues and your future self will thank you for writing more than a single line.
+
 ## References
 
 - [A Note About Git Commit Messages - tbaggery.com](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) - 19 April 2008
